@@ -10,7 +10,7 @@ public class TestMain {
     public static void main(String[] args) throws IOException {
 
         File fileSource = new File("E:/data/animation/78/10000/arm.jpg");
-        String address = "E:/data/animation/78/10000";
+        String address = "E:/data/animation/78/10000/";
         String newAddress = pathModify(address);
         File newFile = new File(newAddress);
         if (!newFile.exists() && !newFile.isDirectory()) {
@@ -20,8 +20,14 @@ public class TestMain {
             System.out.println("文件夹已存在"+newFile.getName());
         }
 
-        File fileTarget = new File(newAddress+"/"+fileSource.getName());
+        File fileTarget = new File(newAddress+fileSource.getName());
 
+        copyFile(fileSource,fileTarget);
+
+
+    }
+
+    private static void copyFile(File fileSource,File fileTarget) throws IOException {
         FileInputStream fis = null;
         BufferedInputStream bis = null;
         FileOutputStream fos = new FileOutputStream(fileTarget);
@@ -59,7 +65,7 @@ public class TestMain {
         for(int i=0;i<str.length;i++){
             System.out.println(str[i]);
         }
-        String path = str[0]+"/"+str[1]+"/"+dateNum+"/"+str[2]+"/"+str[4];
+        String path = str[0]+"/"+str[1]+"/"+dateNum+"/"+str[2]+"/"+str[4]+"/";
         System.out.println(path);
         dateNum++;
         return path;
