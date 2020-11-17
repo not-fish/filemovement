@@ -1,12 +1,13 @@
 package com.filemove.main;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class FileMove {
 
-    private static int dateNum = 20201114;
 
     public static void main(String[] args) throws IOException {
         fileMove(new File("E:/data"),"E:/");
@@ -22,7 +23,13 @@ public class FileMove {
             }
         }else{
             System.out.println(address);
-            String newAddress = pathModify(address);
+            //取出上一次更改文件的时间
+            SimpleDateFormat df = new java.text.SimpleDateFormat("yyyyMMdd");
+            String dateTime=df.format(new Date(file.lastModified()));
+            System.out.println("lastModified = "+dateTime);
+
+            String newAddress = pathModify(address,dateTime);
+
             File newFile = new File(newAddress);
             if (!newFile.exists() && !newFile.isDirectory()) {
                 newFile.mkdirs();
@@ -59,7 +66,7 @@ public class FileMove {
         }
     }
 
-    private static String pathModify(String address) {
+    private static String pathModify(String address,String modifyDate) {
         Map<Integer,Integer> map = new HashMap<Integer,Integer>();
         int num = 0;
         for(int i=0;i<address.length();i++){
@@ -75,9 +82,8 @@ public class FileMove {
         for(int i=0;i<str.length;i++){
             System.out.println(str[i]);
         }
-        String path = str[0]+"/"+str[1]+"/"+dateNum+"/"+str[2]+"/"+str[4]+"/";
+        String path = str[0]+"/"+str[1]+"/"+modifyDate+"/"+str[2]+"/"+str[4]+"/";
         System.out.println(path);
-        dateNum++;
         return path;
     }
 

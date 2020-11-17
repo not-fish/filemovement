@@ -5,7 +5,8 @@ import java.io.IOException;
 
 public class PrintDir {
     public static void main(String[] args) throws IOException {
-        showDir(-1,new File("E:/data")); //这里写上目标项目
+        //这里写上目标项目
+        showDir(-1,new File("E:/data"));
     }
 
     public static void showDir(int indent, File file) throws IOException {
